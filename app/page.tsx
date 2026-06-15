@@ -96,6 +96,210 @@ function VideoPlayer() {
   );
 }
 
+const CAPS = [
+  {
+    x: 48, y: 53,
+    icon: "👁️",
+    label: "Identity",
+    title: "Face Recognition",
+    detail: "Proprietary AI identifies every customer in under one second. No card. No phone. No tap. Register once at any INSHOP unit — recognized everywhere, forever.",
+    tags: ["< 1 second ID", "No device needed", "Lifetime access"],
+    color: "#3b82f6",
+  },
+  {
+    x: 48, y: 29,
+    icon: "📲",
+    label: "Personalization",
+    title: "Smart Display",
+    detail: "The moment your face is recognized, the terminal shows your name, personal offers, and targeted promotions. Every customer gets a different screen — built in real time.",
+    tags: ["Name greeting", "Custom offers", "Targeted promos"],
+    color: "#06b6d4",
+  },
+  {
+    x: 28, y: 63,
+    icon: "📦",
+    label: "Inventory",
+    title: "Live Stock Tracking",
+    detail: "Every product on every shelf tracked in real time across all units. The moment stock drops below threshold, an automatic order fires to the supplier. No one needs to check.",
+    tags: ["Real-time tracking", "Auto reorder", "Zero stockouts"],
+    color: "#22c55e",
+  },
+  {
+    x: 73, y: 63,
+    icon: "🤖",
+    label: "AI Verify",
+    title: "AI Shelf Verification",
+    detail: "After every restock, the filler photographs the shelf. AI analyzes placement, label direction, and quantity. Payment only releases when every single check passes.",
+    tags: ["Photo analysis", "Label detection", "Pay on approval"],
+    color: "#a855f7",
+  },
+  {
+    x: 36, y: 47,
+    icon: "⚡",
+    label: "Checkout",
+    title: "Door-Close Checkout",
+    detail: "Close the door. That's it. The system tracked what you took, charged your stored payment, and sent a receipt by SMS. No scan, no queue, no interaction.",
+    tags: ["Door = checkout", "Auto-charge", "SMS receipt"],
+    color: "#f97316",
+  },
+  {
+    x: 48, y: 86,
+    icon: "🔗",
+    label: "OS",
+    title: "INSHOP Operating System",
+    detail: "Suppliers, fillers, customers, and every live unit connected to one OS. One dashboard. One source of truth. No phone calls, no spreadsheets, no guesswork — ever.",
+    tags: ["Full-stack OS", "All locations", "Real-time sync"],
+    color: "#f59e0b",
+  },
+];
+
+function MachineShowcase() {
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (paused) return;
+    const t = setTimeout(() => setActive(a => (a + 1) % CAPS.length), 4000);
+    return () => clearTimeout(t);
+  }, [active, paused]);
+
+  const cap = CAPS[active];
+
+  return (
+    <section className="py-24 px-6">
+      <div className="max-w-7xl mx-auto">
+        <Reveal className="mb-16">
+          <p className="text-orange-500/70 text-xs font-bold uppercase tracking-[0.3em] mb-5">The Hardware</p>
+          <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-black leading-tight max-w-3xl">
+            One unit.<br />
+            <span className="text-gray-600">Six technologies.</span>
+          </h2>
+        </Reveal>
+
+        <div className="grid lg:grid-cols-[3fr_2fr] gap-12 items-start">
+          {/* Machine image with hotspots */}
+          <div className="relative rounded-3xl overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.8)] border border-white/5">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/machine.jpg" alt="INSHOP Unit" className="w-full h-auto block" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none" />
+
+            {/* Scan line follows active hotspot */}
+            <div
+              className="absolute left-0 right-0 h-px pointer-events-none transition-all duration-700 ease-out"
+              style={{
+                top: `${cap.y}%`,
+                background: `linear-gradient(90deg, transparent 0%, ${cap.color}80 30%, ${cap.color} 50%, ${cap.color}80 70%, transparent 100%)`,
+                boxShadow: `0 0 12px ${cap.color}50`,
+              }}
+            />
+
+            {/* Hotspot buttons */}
+            {CAPS.map((c, i) => (
+              <button
+                key={i}
+                className="absolute -translate-x-1/2 -translate-y-1/2 z-10"
+                style={{ left: `${c.x}%`, top: `${c.y}%` }}
+                onClick={() => { setActive(i); setPaused(true); }}
+                onMouseEnter={() => { setActive(i); setPaused(true); }}
+                onMouseLeave={() => setPaused(false)}
+              >
+                {active === i && (
+                  <>
+                    <div className="absolute inset-[-12px] rounded-full border border-orange-500/60 animate-ping pointer-events-none" />
+                    <div className="absolute inset-[-6px] rounded-full bg-orange-500/10 pointer-events-none" />
+                  </>
+                )}
+                <div
+                  className={`relative w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-black transition-all duration-300 ${active === i ? "scale-125 text-white" : "bg-black/70 border border-white/20 text-white/40 backdrop-blur-sm"}`}
+                  style={active === i ? { background: CAPS[i].color, boxShadow: `0 0 20px ${CAPS[i].color}90` } : {}}
+                >
+                  {i + 1}
+                </div>
+                <div className={`
+                  absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap
+                  bg-black/90 border border-white/8 text-white text-[9px] font-bold
+                  uppercase tracking-widest px-2 py-1 rounded-lg transition-all duration-200
+                  ${active === i ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1 pointer-events-none"}
+                `}>
+                  {c.label}
+                </div>
+              </button>
+            ))}
+
+            <div className="absolute bottom-4 left-4 text-white/15 text-[9px] font-black tracking-widest uppercase pointer-events-none select-none">
+              INSHOP Unit — Holon
+            </div>
+          </div>
+
+          {/* Capability showcase */}
+          <div
+            className="lg:sticky lg:top-24"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+          >
+            {/* Progress bar */}
+            <div className="h-[2px] bg-white/5 mb-10 rounded-full overflow-hidden">
+              <div
+                key={active}
+                className="h-full rounded-full"
+                style={{ animation: paused ? "none" : "fillBar 4s linear both", width: paused ? "0" : undefined, background: cap.color }}
+              />
+            </div>
+
+            {/* Animated content */}
+            <div key={`cap-${active}`} style={{ animation: "capIn 0.45s cubic-bezier(0.16,1,0.3,1) both" }}>
+              <div
+                className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-5"
+                style={{ background: cap.color + "18", border: `1px solid ${cap.color}35` }}
+              >
+                {cap.icon}
+              </div>
+              <p className="text-[10px] font-black uppercase tracking-[0.25em] mb-3" style={{ color: cap.color + "bb" }}>{cap.label}</p>
+              <h3 className="text-[clamp(1.8rem,3.5vw,2.8rem)] font-black text-white mb-5 leading-tight">{cap.title}</h3>
+              <p className="text-gray-500 text-base lg:text-lg leading-relaxed mb-7">{cap.detail}</p>
+              <div className="flex flex-wrap gap-2">
+                {cap.tags.map(t => (
+                  <span key={t} className="text-xs px-3 py-1.5 rounded-full font-semibold" style={{ background: cap.color + "12", border: `1px solid ${cap.color}30`, color: cap.color }}>
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Tab navigation */}
+            <div className="grid grid-cols-3 gap-2 mt-10">
+              {CAPS.map((c, i) => (
+                <button
+                  key={i}
+                  onClick={() => { setActive(i); setPaused(true); }}
+                  className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 text-left bg-[#0d0d0d] border"
+                  style={active === i
+                    ? { borderColor: c.color + "50", background: c.color + "12", color: c.color }
+                    : { borderColor: "rgba(255,255,255,0.04)", color: "#4b5563" }
+                  }
+                >
+                  <span
+                    className="shrink-0 text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center"
+                    style={active === i ? { background: c.color, color: "#fff" } : { background: "#1a1a1a", color: "#374151" }}
+                  >
+                    {i + 1}
+                  </span>
+                  <span className="truncate">{c.label}</span>
+                </button>
+              ))}
+            </div>
+
+            <style>{`
+              @keyframes fillBar { from { width: 0 } to { width: 100% } }
+              @keyframes capIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+            `}</style>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -138,9 +342,10 @@ export default function Home() {
 
       {/* HERO */}
       <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_70%_at_50%_55%,rgba(249,115,22,0.07),transparent)]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full border border-orange-500/5" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] rounded-full border border-orange-500/3" />
+        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 70% 60% at 50% 55%, rgba(249,115,22,0.12) 0%, rgba(59,130,246,0.06) 50%, transparent 100%)" }} />
+        <div className="absolute top-1/3 left-1/4 w-96 h-96 rounded-full opacity-20" style={{ background: "radial-gradient(circle, rgba(168,85,247,0.15), transparent 70%)" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full border border-orange-500/8" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] rounded-full border border-blue-500/4" />
 
         <div className="relative z-10 max-w-5xl mx-auto pt-16">
           <div style={{ animation: "rise 1.2s cubic-bezier(0.16,1,0.3,1) both" }}>
@@ -185,6 +390,8 @@ export default function Home() {
         </div>
         <style>{`@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-25%)}}`}</style>
       </div>
+
+      <MachineShowcase />
 
       {/* EXPERIENCE */}
       <section id="experience" className="py-36 px-6">
@@ -249,16 +456,23 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
-              { icon: "👁", title: "Face Recognition", body: "One-time registration. After that, you're identified the moment you approach. No friction, ever." },
-              { icon: "⚡", title: "Frictionless Payment", body: "Payment tokens stored at registration. Every purchase auto-charged when the door closes. Receipt by SMS." },
-              { icon: "📦", title: "Live Inventory", body: "Every product tracked in real time across all units. When stock drops, automatic orders fire — no human needed." },
-              { icon: "🤖", title: "AI Shelf Verification", body: "Fillers photograph restocked shelves. AI checks placement and facing before approving any payment. Zero guesswork." },
-              { icon: "📲", title: "Personalized Screen", body: "The terminal shows your name, personalized offers, and targeted promotions the moment you approach." },
-              { icon: "🔗", title: "One OS. Everything.", body: "Suppliers, inventory, refillers, retail units, and customers — all wired into a single operating system." },
+              { icon: "👁", title: "Face Recognition", body: "One-time registration. After that, you're identified the moment you approach. No friction, ever.", color: "#3b82f6" },
+              { icon: "⚡", title: "Frictionless Payment", body: "Payment tokens stored at registration. Every purchase auto-charged when the door closes. Receipt by SMS.", color: "#22c55e" },
+              { icon: "📦", title: "Live Inventory", body: "Every product tracked in real time across all units. When stock drops, automatic orders fire — no human needed.", color: "#f97316" },
+              { icon: "🤖", title: "AI Shelf Verification", body: "Fillers photograph restocked shelves. AI checks placement and facing before approving any payment. Zero guesswork.", color: "#a855f7" },
+              { icon: "📲", title: "Personalized Screen", body: "The terminal shows your name, personalized offers, and targeted promotions the moment you approach.", color: "#06b6d4" },
+              { icon: "🔗", title: "One OS. Everything.", body: "Suppliers, inventory, refillers, retail units, and customers — all wired into a single operating system.", color: "#f59e0b" },
             ].map((item, i) => (
               <Reveal key={item.title} delay={i * 0.07}>
-                <div className="group h-full bg-[#0d0d0d] hover:bg-[#101010] border border-white/4 hover:border-orange-500/15 rounded-3xl p-8 transition-all duration-500">
-                  <div className="text-3xl mb-6">{item.icon}</div>
+                <div
+                  className="group h-full bg-[#0d0d0d] border border-white/4 rounded-3xl p-8 transition-all duration-500 hover:bg-[#101010]"
+                  style={{ ["--c" as string]: item.color }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = item.color + "40"; (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 30px ${item.color}15`; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = ""; (e.currentTarget as HTMLDivElement).style.boxShadow = ""; }}
+                >
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-6" style={{ background: item.color + "15", border: `1px solid ${item.color}30` }}>
+                    {item.icon}
+                  </div>
                   <h3 className="font-black text-white text-xl mb-3">{item.title}</h3>
                   <p className="text-gray-600 text-sm leading-relaxed">{item.body}</p>
                 </div>
@@ -288,6 +502,7 @@ export default function Home() {
                 tagline: "Detect. Order. Deliver. Refill.",
                 desc: "The system detects shortage and triggers the entire supply chain automatically — from order placement to shelf restocking.",
                 icon: "📦",
+                color: "#22c55e",
               },
               {
                 href: "/modules/fillers",
@@ -296,6 +511,7 @@ export default function Home() {
                 tagline: "Alert. Accept. Restock. Verify.",
                 desc: "Nearby fillers are dispatched when stock drops. AI verifies the refill before any payment is approved. No shortcuts.",
                 icon: "♻️",
+                color: "#3b82f6",
               },
               {
                 href: "/modules/referral",
@@ -304,21 +520,29 @@ export default function Home() {
                 tagline: "Share. Redeem. Earn.",
                 desc: "Trainers and promoters share digital coupons and earn commission only when a real purchase happens at the terminal.",
                 icon: "🤝",
+                color: "#f97316",
               },
             ].map((m, i) => (
               <Reveal key={m.href} delay={i * 0.1}>
-                <Link href={m.href} className="group h-full flex flex-col bg-[#0d0d0d] hover:bg-[#101010] border border-white/4 hover:border-orange-500/25 rounded-3xl p-8 transition-all duration-500 cursor-pointer">
+                <Link
+                  href={m.href}
+                  className="group h-full flex flex-col bg-[#0d0d0d] border border-white/4 rounded-3xl p-8 transition-all duration-500 cursor-pointer"
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = m.color + "40"; (e.currentTarget as HTMLElement).style.boxShadow = `0 0 40px ${m.color}12`; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = ""; (e.currentTarget as HTMLElement).style.boxShadow = ""; }}
+                >
                   <div className="flex items-start justify-between mb-10">
-                    <span className="text-orange-500/30 font-black text-sm group-hover:text-orange-500/60 transition-colors">{m.num}</span>
-                    <div className="w-10 h-10 rounded-full border border-white/8 flex items-center justify-center group-hover:border-orange-500/30 group-hover:bg-orange-500/5 transition-all">
-                      <svg className="w-4 h-4 text-gray-600 group-hover:text-orange-500 transition-colors -rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 7l-10 10M7 7h10v10" /></svg>
+                    <span className="font-black text-sm transition-colors" style={{ color: m.color + "60" }}>{m.num}</span>
+                    <div className="w-10 h-10 rounded-full border border-white/8 flex items-center justify-center transition-all group-hover:scale-110" style={{ borderColor: m.color + "30" }}>
+                      <svg className="w-4 h-4 -rotate-45 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" style={{ color: m.color + "80" }}><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 7l-10 10M7 7h10v10" /></svg>
                     </div>
                   </div>
-                  <div className="text-4xl mb-6">{m.icon}</div>
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-6" style={{ background: m.color + "15", border: `1px solid ${m.color}30` }}>
+                    {m.icon}
+                  </div>
                   <h3 className="font-black text-white text-2xl mb-2">{m.title}</h3>
-                  <p className="text-orange-500/70 text-sm font-semibold mb-4">{m.tagline}</p>
+                  <p className="text-sm font-semibold mb-4" style={{ color: m.color + "cc" }}>{m.tagline}</p>
                   <p className="text-gray-600 text-sm leading-relaxed flex-1">{m.desc}</p>
-                  <div className="mt-8 text-xs font-bold uppercase tracking-widest text-gray-700 group-hover:text-orange-500 transition-colors flex items-center gap-2">
+                  <div className="mt-8 text-xs font-bold uppercase tracking-widest flex items-center gap-2 transition-colors text-gray-700 group-hover:text-white/70">
                     Explore module
                     <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 7l-10 10M7 7h10v10" /></svg>
                   </div>
@@ -385,14 +609,18 @@ export default function Home() {
 
           <div className="grid md:grid-cols-3 gap-5">
             {[
-              { phase: "Phase 01", title: "Win Israel", stat: "800", label: "target gyms", desc: "Build density and registered users across Israel's fitness scene." },
-              { phase: "Phase 02", title: "Scale Globally", stat: "20K+", label: "gyms worldwide", desc: "Replicate the proven model across global fitness networks." },
-              { phase: "Phase 03", title: "Beyond Gyms", stat: "∞", label: "autonomous retail", desc: "Street retail, offices, transport hubs — the full autonomous store." },
+              { phase: "Phase 01", title: "Win Israel", stat: "800", label: "target gyms", desc: "Build density and registered users across Israel's fitness scene.", color: "#22c55e" },
+              { phase: "Phase 02", title: "Scale Globally", stat: "20K+", label: "gyms worldwide", desc: "Replicate the proven model across global fitness networks.", color: "#3b82f6" },
+              { phase: "Phase 03", title: "Beyond Gyms", stat: "∞", label: "autonomous retail", desc: "Street retail, offices, transport hubs — the full autonomous store.", color: "#a855f7" },
             ].map((p, i) => (
               <Reveal key={p.phase} delay={i * 0.12}>
-                <div className="bg-[#0d0d0d] border border-white/4 hover:border-orange-500/15 rounded-3xl p-8 text-left h-full transition-all">
-                  <p className="text-orange-500/40 text-xs font-black uppercase tracking-widest mb-6">{p.phase}</p>
-                  <div className="text-5xl font-black text-orange-500 mb-1">{p.stat}</div>
+                <div
+                  className="bg-[#0d0d0d] border border-white/4 rounded-3xl p-8 text-left h-full transition-all duration-500"
+                  onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = p.color + "40"; (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 30px ${p.color}12`; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = ""; (e.currentTarget as HTMLDivElement).style.boxShadow = ""; }}
+                >
+                  <p className="text-xs font-black uppercase tracking-widest mb-6" style={{ color: p.color + "70" }}>{p.phase}</p>
+                  <div className="text-5xl font-black mb-1" style={{ color: p.color }}>{p.stat}</div>
                   <div className="text-gray-600 text-sm mb-5">{p.label}</div>
                   <h3 className="font-black text-white text-xl mb-3">{p.title}</h3>
                   <p className="text-gray-600 text-sm leading-relaxed">{p.desc}</p>
