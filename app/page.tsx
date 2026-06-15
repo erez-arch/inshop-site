@@ -184,12 +184,12 @@ function VideoPlayer() {
     v.currentTime = ((e.clientX - rect.left) / rect.width) * v.duration;
   };
   return (
-    <div className="relative group bg-[#032D60]/5 rounded-3xl overflow-hidden border border-[#cce0f5]">
+    <div className="relative group bg-[#0a1520] rounded-3xl overflow-hidden border border-[#1c3350]">
       <video ref={videoRef} src="/demo.mp4" className="w-full h-auto block" playsInline muted={muted} />
-      <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-[#032D60]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         <div className="px-6 pb-5 space-y-3">
           <div className="cursor-pointer" onClick={seek}>
-            <div className="h-1 bg-white/30 rounded-full overflow-hidden">
+            <div className="h-1 bg-[#0e1b2a]/30 rounded-full overflow-hidden">
               <div className="h-full bg-[#00A1E0] rounded-full transition-all" style={{ width: `${progress}%` }} />
             </div>
           </div>
@@ -212,7 +212,7 @@ function VideoPlayer() {
       </div>
       {!playing && (
         <button onClick={toggle} className="absolute inset-0 flex items-center justify-center">
-          <div className="w-20 h-20 rounded-full bg-white/80 backdrop-blur-md border border-[#00A1E0]/30 flex items-center justify-center hover:bg-[#00A1E0] hover:border-[#00A1E0] transition-all duration-300 group/btn shadow-lg">
+          <div className="w-20 h-20 rounded-full bg-[#0e1b2a]/80 backdrop-blur-md border border-[#00A1E0]/30 flex items-center justify-center hover:bg-[#00A1E0] hover:border-[#00A1E0] transition-all duration-300 group/btn shadow-lg">
             <svg className="w-8 h-8 text-[#00A1E0] group-hover/btn:text-white translate-x-1 transition-colors" fill="currentColor" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
           </div>
         </button>
@@ -240,16 +240,16 @@ function MachineShowcase({ t }: { t: typeof T.en }) {
       <div className="max-w-7xl mx-auto">
         <Reveal className="mb-16">
           <p className="text-[#00A1E0] text-xs font-bold uppercase tracking-[0.3em] mb-5">{t.machine_tag}</p>
-          <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-black leading-tight max-w-3xl text-[#0d2f5e]">
+          <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-black leading-tight max-w-3xl text-white">
             {t.machine_h2a}<br /><span className="text-[#00A1E0]/50">{t.machine_h2b}</span>
           </h2>
         </Reveal>
         <div className="grid lg:grid-cols-[3fr_2fr] gap-12 items-start">
           {/* Machine image */}
-          <div className="relative rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(0,100,200,0.15)] border border-[#cce0f5]">
+          <div className="relative rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(0,100,200,0.15)] border border-[#1c3350]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/machine.jpg" alt="INSHOP Unit" className="w-full h-auto block" />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#032D60]/20 via-transparent to-[#032D60]/30 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 pointer-events-none" />
             <div className="absolute left-0 right-0 h-px pointer-events-none transition-all duration-700 ease-out"
               style={{ top:`${[53,29,63,63,47,86][active]}%`, background:`linear-gradient(90deg,transparent,${col}80 30%,${col} 50%,${col}80 70%,transparent)`, boxShadow:`0 0 12px ${col}60` }} />
             {t.caps.map((c, i) => (
@@ -266,7 +266,7 @@ function MachineShowcase({ t }: { t: typeof T.en }) {
                   style={active === i ? { background: CAP_COLORS[i], color:"#fff", transform:"scale(1.25)", boxShadow:`0 0 20px ${CAP_COLORS[i]}90` } : { background:"rgba(255,255,255,0.8)", border:`2px solid ${CAP_COLORS[i]}50`, color: CAP_COLORS[i], backdropFilter:"blur(4px)" }}>
                   {i + 1}
                 </div>
-                <div className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap bg-[#032D60] text-white text-[9px] font-bold uppercase tracking-widest px-2 py-1 rounded-lg transition-all duration-200 ${active === i ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1 pointer-events-none"}`}>
+                <div className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap bg-[#030e1a] text-white text-[9px] font-bold uppercase tracking-widest px-2 py-1 rounded-lg transition-all duration-200 ${active === i ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1 pointer-events-none"}`}>
                   {c.label}
                 </div>
               </button>
@@ -276,15 +276,15 @@ function MachineShowcase({ t }: { t: typeof T.en }) {
 
           {/* Capability panel */}
           <div className="lg:sticky lg:top-24" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-            <div className="h-[2px] bg-[#eaf3ff] mb-10 rounded-full overflow-hidden">
+            <div className="h-[2px] bg-[#1a2e44] mb-10 rounded-full overflow-hidden">
               <div key={active} className="h-full rounded-full"
                 style={{ animation: paused ? "none" : "fillBar 4s linear both", width: paused ? "0" : undefined, background: col }} />
             </div>
             <div key={`cap-${active}`} style={{ animation: "capIn 0.45s cubic-bezier(0.16,1,0.3,1) both" }}>
               <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-5" style={{ background: col + "18", border:`1px solid ${col}35` }}>{CAP_ICONS[active]}</div>
               <p className="text-[10px] font-black uppercase tracking-[0.25em] mb-3" style={{ color: col }}>{cap.label}</p>
-              <h3 className="text-[clamp(1.8rem,3.5vw,2.8rem)] font-black text-[#0d2f5e] mb-5 leading-tight">{cap.title}</h3>
-              <p className="text-[#4a6885] text-base lg:text-lg leading-relaxed mb-7">{cap.detail}</p>
+              <h3 className="text-[clamp(1.8rem,3.5vw,2.8rem)] font-black text-white mb-5 leading-tight">{cap.title}</h3>
+              <p className="text-[#8ab4cf] text-base lg:text-lg leading-relaxed mb-7">{cap.detail}</p>
               <div className="flex flex-wrap gap-2">
                 {cap.tags.map(tag => (
                   <span key={tag} className="text-xs px-3 py-1.5 rounded-full font-semibold" style={{ background: col + "12", border:`1px solid ${col}30`, color: col }}>{tag}</span>
@@ -294,10 +294,10 @@ function MachineShowcase({ t }: { t: typeof T.en }) {
             <div className="grid grid-cols-3 gap-2 mt-10">
               {t.caps.map((c, i) => (
                 <button key={i} onClick={() => { setActive(i); setPaused(true); }}
-                  className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 text-left bg-white border"
-                  style={active === i ? { borderColor: CAP_COLORS[i] + "50", background: CAP_COLORS[i] + "10", color: CAP_COLORS[i] } : { borderColor:"#c8dff0", color:"#7a9abb" }}>
+                  className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-300 text-left bg-[#0e1b2a] border"
+                  style={active === i ? { borderColor: CAP_COLORS[i] + "50", background: CAP_COLORS[i] + "12", color: CAP_COLORS[i] } : { borderColor:"#1c3350", color:"#5a8aaa" }}>
                   <span className="shrink-0 text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center"
-                    style={active === i ? { background: CAP_COLORS[i], color:"#fff" } : { background:"#e3f0fd", color:"#7a9abb" }}>
+                    style={active === i ? { background: CAP_COLORS[i], color:"#fff" } : { background:"#1a2e44", color:"#5a8aaa" }}>
                     {i + 1}
                   </span>
                   <span className="truncate">{c.label}</span>
@@ -331,22 +331,22 @@ export default function Home() {
   }, []);
 
   return (
-    <div dir={t.dir} className="bg-[#f5f8ff] text-[#0d2f5e] overflow-x-hidden selection:bg-[#00A1E0]/20">
+    <div dir={t.dir} className="bg-[#070c14] text-white overflow-x-hidden selection:bg-[#00A1E0]/20">
 
       {/* NAV */}
-      <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? "bg-white/90 backdrop-blur-2xl border-b border-[#cce0f5] shadow-[0_2px_20px_rgba(0,100,200,0.06)]" : ""}`}>
+      <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? "bg-[#0e1b2a]/90 backdrop-blur-2xl border-b border-[#1c3350] shadow-[0_2px_20px_rgba(0,100,200,0.06)]" : ""}`}>
         <div className="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
-          <Link href="/" className="text-xl font-black tracking-tight select-none text-[#0d2f5e]">in<span className="text-[#00A1E0]">S</span>hop</Link>
+          <Link href="/" className="text-xl font-black tracking-tight select-none text-white">in<span className="text-[#00A1E0]">S</span>hop</Link>
           <div className="hidden md:flex items-center gap-8 text-sm">
             {[[t.nav_experience,"#experience"],[t.nav_technology,"#technology"],[t.nav_live,"#live"]].map(([l,h]) => (
-              <a key={h} href={h} className="text-[#4a6885] hover:text-[#0d2f5e] transition-colors font-medium">{l}</a>
+              <a key={h} href={h} className="text-[#8ab4cf] hover:text-white transition-colors font-medium">{l}</a>
             ))}
           </div>
           <div className="hidden md:flex items-center gap-3">
             {/* Language toggle */}
             <button
               onClick={() => setLang(lang === "en" ? "he" : "en")}
-              className="flex items-center gap-2 border border-[#cce0f5] hover:border-[#00A1E0]/40 bg-white text-xs font-bold px-3 py-2 rounded-full transition-all hover:shadow-sm text-[#4a6885]"
+              className="flex items-center gap-2 border border-[#1c3350] hover:border-[#00A1E0]/40 bg-[#0e1b2a] text-xs font-bold px-3 py-2 rounded-full transition-all hover:shadow-sm text-[#8ab4cf]"
             >
               {lang === "en" ? "🇮🇱 עברית" : "🇺🇸 English"}
             </button>
@@ -354,16 +354,16 @@ export default function Home() {
               {t.nav_cta}
             </a>
           </div>
-          <button className="md:hidden text-[#4a6885]" onClick={() => setMenuOpen(!menuOpen)}>
+          <button className="md:hidden text-[#8ab4cf]" onClick={() => setMenuOpen(!menuOpen)}>
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {menuOpen ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" /> : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />}
             </svg>
           </button>
         </div>
         {menuOpen && (
-          <div className="md:hidden bg-white/95 px-6 py-6 flex flex-col gap-5 text-sm border-b border-[#cce0f5]">
+          <div className="md:hidden bg-[#0e1b2a]/95 px-6 py-6 flex flex-col gap-5 text-sm border-b border-[#1c3350]">
             {[[t.nav_experience,"#experience"],[t.nav_technology,"#technology"],[t.nav_live,"#live"],[t.nav_cta,"#contact"]].map(([l,h]) => (
-              <a key={h} href={h} onClick={() => setMenuOpen(false)} className="text-[#4a6885] hover:text-[#0d2f5e]">{l}</a>
+              <a key={h} href={h} onClick={() => setMenuOpen(false)} className="text-[#8ab4cf] hover:text-white">{l}</a>
             ))}
             <button onClick={() => { setLang(lang === "en" ? "he" : "en"); setMenuOpen(false); }} className="text-left text-[#00A1E0] font-bold">
               {lang === "en" ? "🇮🇱 עברית" : "🇺🇸 English"}
@@ -381,10 +381,10 @@ export default function Home() {
         <div className="relative z-10 max-w-5xl mx-auto pt-16">
           <div style={{ animation:"rise 1.2s cubic-bezier(0.16,1,0.3,1) both" }}>
             <p className="text-[#00A1E0] text-xs font-bold uppercase tracking-[0.3em] mb-12">{t.hero_tag}</p>
-            <h1 className="text-[clamp(3.5rem,10vw,7rem)] font-black leading-[0.88] tracking-tight mb-8 text-[#0d2f5e]">
+            <h1 className="text-[clamp(3.5rem,10vw,7rem)] font-black leading-[0.88] tracking-tight mb-8 text-white">
               {t.hero_h1a}<br /><span className="text-[#00A1E0]">{t.hero_h1b}</span>
             </h1>
-            <p className="text-[#4a6885] text-xl md:text-2xl max-w-xl mx-auto mb-14 leading-relaxed font-light" style={{ whiteSpace:"pre-line" }}>
+            <p className="text-[#8ab4cf] text-xl md:text-2xl max-w-xl mx-auto mb-14 leading-relaxed font-light" style={{ whiteSpace:"pre-line" }}>
               {t.hero_sub}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -404,7 +404,7 @@ export default function Home() {
       </section>
 
       {/* MARQUEE */}
-      <div className="border-y border-[#cce0f5] py-5 overflow-hidden bg-white">
+      <div className="border-y border-[#1c3350] py-5 overflow-hidden bg-[#0e1b2a]">
         <div className="flex gap-0 animate-[marquee_18s_linear_infinite] whitespace-nowrap">
           {[...Array(4)].map((_,i) => (
             <div key={i} className="flex shrink-0">
@@ -422,11 +422,11 @@ export default function Home() {
       <MachineShowcase t={t} />
 
       {/* EXPERIENCE */}
-      <section id="experience" className="py-36 px-6 bg-white">
+      <section id="experience" className="py-36 px-6 bg-[#0e1b2a]">
         <div className="max-w-7xl mx-auto">
           <Reveal className="mb-24">
             <p className="text-[#00A1E0] text-xs font-bold uppercase tracking-[0.3em] mb-5">{t.exp_tag}</p>
-            <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-black leading-tight max-w-3xl text-[#0d2f5e]">
+            <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-black leading-tight max-w-3xl text-white">
               {t.exp_h2a}<br /><span className="text-[#00A1E0]/40">{t.exp_h2b}</span>
             </h2>
           </Reveal>
@@ -437,8 +437,8 @@ export default function Home() {
                   <div className="group flex gap-6 py-6 border-b border-[#e3f0fd] hover:border-[#00A1E0]/30 transition-colors last:border-0">
                     <span className="text-[#00A1E0]/30 font-black text-sm pt-1 w-8 shrink-0 group-hover:text-[#00A1E0]/70 transition-colors">0{i+1}</span>
                     <div>
-                      <h3 className="font-bold text-[#0d2f5e] text-lg mb-1">{step.title}</h3>
-                      <p className="text-[#4a6885] text-sm leading-relaxed">{step.body}</p>
+                      <h3 className="font-bold text-white text-lg mb-1">{step.title}</h3>
+                      <p className="text-[#8ab4cf] text-sm leading-relaxed">{step.body}</p>
                     </div>
                   </div>
                 </Reveal>
@@ -458,26 +458,26 @@ export default function Home() {
       </section>
 
       {/* TECHNOLOGY */}
-      <section id="technology" className="py-36 px-6 bg-[#eaf3ff]">
+      <section id="technology" className="py-36 px-6 bg-[#0d1825]">
         <div className="max-w-7xl mx-auto">
           <Reveal className="mb-24">
             <p className="text-[#00A1E0] text-xs font-bold uppercase tracking-[0.3em] mb-5">{t.tech_tag}</p>
-            <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-black leading-tight max-w-3xl text-[#0d2f5e]">
+            <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-black leading-tight max-w-3xl text-white">
               {t.tech_h2a}<br /><span className="text-[#00A1E0]/40">{t.tech_h2b}</span>
             </h2>
-            <p className="text-[#4a6885] text-lg mt-6 max-w-lg">{t.tech_sub}</p>
+            <p className="text-[#8ab4cf] text-lg mt-6 max-w-lg">{t.tech_sub}</p>
           </Reveal>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {t.tech_cards.map((card, i) => (
               <Reveal key={card.title} delay={i * 0.07}>
-                <div className="group h-full bg-white border border-[#cce0f5] rounded-3xl p-8 transition-all duration-500"
+                <div className="group h-full bg-[#0e1b2a] border border-[#1c3350] rounded-3xl p-8 transition-all duration-500"
                   onMouseEnter={e => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = card.color + "60"; el.style.boxShadow = `0 8px 30px ${card.color}18`; }}
                   onMouseLeave={e => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = ""; el.style.boxShadow = ""; }}>
                   <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-6" style={{ background: card.color + "15", border:`1px solid ${card.color}30` }}>
                     {card.icon}
                   </div>
-                  <h3 className="font-black text-[#0d2f5e] text-xl mb-3">{card.title}</h3>
-                  <p className="text-[#4a6885] text-sm leading-relaxed">{card.body}</p>
+                  <h3 className="font-black text-white text-xl mb-3">{card.title}</h3>
+                  <p className="text-[#8ab4cf] text-sm leading-relaxed">{card.body}</p>
                 </div>
               </Reveal>
             ))}
@@ -486,18 +486,18 @@ export default function Home() {
       </section>
 
       {/* MODULES */}
-      <section className="py-36 px-6 bg-white">
+      <section className="py-36 px-6 bg-[#0e1b2a]">
         <div className="max-w-7xl mx-auto">
           <Reveal className="mb-24">
             <p className="text-[#00A1E0] text-xs font-bold uppercase tracking-[0.3em] mb-5">{t.mod_tag}</p>
-            <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-black leading-tight max-w-3xl text-[#0d2f5e]">
+            <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-black leading-tight max-w-3xl text-white">
               {t.mod_h2a}<br /><span className="text-[#00A1E0]/40">{t.mod_h2b}</span>
             </h2>
           </Reveal>
           <div className="grid md:grid-cols-3 gap-6">
             {t.modules.map((m, i) => (
               <Reveal key={m.href} delay={i * 0.1}>
-                <Link href={m.href} className="group h-full flex flex-col bg-white border border-[#cce0f5] rounded-3xl p-8 transition-all duration-500"
+                <Link href={m.href} className="group h-full flex flex-col bg-[#0e1b2a] border border-[#1c3350] rounded-3xl p-8 transition-all duration-500"
                   onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = m.color + "60"; el.style.boxShadow = `0 8px 40px ${m.color}14`; }}
                   onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.borderColor = ""; el.style.boxShadow = ""; }}>
                   <div className="flex items-start justify-between mb-10">
@@ -507,10 +507,10 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-6" style={{ background: m.color + "15", border:`1px solid ${m.color}30` }}>{m.icon}</div>
-                  <h3 className="font-black text-[#0d2f5e] text-2xl mb-2">{m.title}</h3>
+                  <h3 className="font-black text-white text-2xl mb-2">{m.title}</h3>
                   <p className="text-sm font-semibold mb-4" style={{ color: m.color }}>{m.tagline}</p>
-                  <p className="text-[#4a6885] text-sm leading-relaxed flex-1">{m.desc}</p>
-                  <div className="mt-8 text-xs font-bold uppercase tracking-widest flex items-center gap-2 text-[#6a8caa] group-hover:text-[#0d2f5e] transition-colors">
+                  <p className="text-[#8ab4cf] text-sm leading-relaxed flex-1">{m.desc}</p>
+                  <div className="mt-8 text-xs font-bold uppercase tracking-widest flex items-center gap-2 text-[#8ab4cf] group-hover:text-white transition-colors">
                     {m.cta}
                     <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 7l-10 10M7 7h10v10"/></svg>
                   </div>
@@ -522,33 +522,33 @@ export default function Home() {
       </section>
 
       {/* LIVE */}
-      <section id="live" className="py-36 px-6 bg-[#eaf3ff]">
+      <section id="live" className="py-36 px-6 bg-[#0d1825]">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <Reveal>
               <p className="text-[#00A1E0] text-xs font-bold uppercase tracking-[0.3em] mb-5">{t.live_tag}</p>
-              <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-black leading-tight mb-6 text-[#0d2f5e]">
+              <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-black leading-tight mb-6 text-white">
                 {t.live_h2a}<br /><span className="text-[#00A1E0]">{t.live_h2b}</span>
               </h2>
-              <p className="text-[#4a6885] text-lg mb-12 leading-relaxed">{t.live_desc}</p>
+              <p className="text-[#8ab4cf] text-lg mb-12 leading-relaxed">{t.live_desc}</p>
               <div className="flex gap-8">
                 <div>
                   <div className="text-5xl font-black text-[#00A1E0]">{t.live_stat1}</div>
-                  <div className="text-[#6a8caa] text-sm mt-1 uppercase tracking-wide">{t.live_label1}</div>
+                  <div className="text-[#8ab4cf] text-sm mt-1 uppercase tracking-wide">{t.live_label1}</div>
                 </div>
                 <div className="w-px bg-[#c8dff0]" />
                 <div>
                   <div className="text-5xl font-black text-[#00A1E0]">{t.live_stat2}<span className="text-[#06AED5]">+</span></div>
-                  <div className="text-[#6a8caa] text-sm mt-1 uppercase tracking-wide">{t.live_label2}</div>
+                  <div className="text-[#8ab4cf] text-sm mt-1 uppercase tracking-wide">{t.live_label2}</div>
                 </div>
               </div>
             </Reveal>
             <Reveal delay={0.2}>
               <div className="grid grid-cols-2 gap-3">
                 {["Profit Holon","Profit Shoham","Profit Kiryat Ono","Profit Modi'in","Profit Yokneam","Profit Petah Tikva","Profit Kiryat Yam","Profit Rosh HaAyin","Profit Yavne","Lazuz Petah Tikva"].map(loc => (
-                  <div key={loc} className="flex items-center gap-3 bg-white border border-[#cce0f5] hover:border-[#00A1E0]/40 rounded-xl px-4 py-3 transition-colors group">
+                  <div key={loc} className="flex items-center gap-3 bg-[#0e1b2a] border border-[#1c3350] hover:border-[#00A1E0]/40 rounded-xl px-4 py-3 transition-colors group">
                     <span className="w-2 h-2 rounded-full bg-[#00A1E0] shrink-0 group-hover:shadow-[0_0_8px_rgba(0,161,224,0.6)] transition-all" />
-                    <span className="text-sm text-[#4a6885] group-hover:text-[#0d2f5e] transition-colors">{loc}</span>
+                    <span className="text-sm text-[#8ab4cf] group-hover:text-white transition-colors">{loc}</span>
                   </div>
                 ))}
               </div>
@@ -558,26 +558,26 @@ export default function Home() {
       </section>
 
       {/* VISION */}
-      <section className="py-36 px-6 bg-white">
+      <section className="py-36 px-6 bg-[#0e1b2a]">
         <div className="max-w-5xl mx-auto text-center">
           <Reveal>
             <p className="text-[#00A1E0] text-xs font-bold uppercase tracking-[0.3em] mb-5">{t.vis_tag}</p>
-            <h2 className="text-[clamp(2.5rem,7vw,6rem)] font-black leading-tight mb-6 text-[#0d2f5e]">
+            <h2 className="text-[clamp(2.5rem,7vw,6rem)] font-black leading-tight mb-6 text-white">
               {t.vis_h2a}<br /><span className="text-[#00A1E0]">{t.vis_h2b}</span>
             </h2>
-            <p className="text-[#4a6885] text-xl mb-20 max-w-xl mx-auto">{t.vis_sub}</p>
+            <p className="text-[#8ab4cf] text-xl mb-20 max-w-xl mx-auto">{t.vis_sub}</p>
           </Reveal>
           <div className="grid md:grid-cols-3 gap-5">
             {t.phases.map((p, i) => (
               <Reveal key={p.phase} delay={i * 0.12}>
-                <div className="bg-white border border-[#cce0f5] rounded-3xl p-8 text-left h-full transition-all duration-500"
+                <div className="bg-[#0e1b2a] border border-[#1c3350] rounded-3xl p-8 text-left h-full transition-all duration-500"
                   onMouseEnter={e => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = p.color + "60"; el.style.boxShadow = `0 8px 30px ${p.color}12`; }}
                   onMouseLeave={e => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = ""; el.style.boxShadow = ""; }}>
                   <p className="text-xs font-black uppercase tracking-widest mb-6" style={{ color: p.color + "90" }}>{p.phase}</p>
                   <div className="text-5xl font-black mb-1" style={{ color: p.color }}>{p.stat}</div>
-                  <div className="text-[#6a8caa] text-sm mb-5">{p.label}</div>
-                  <h3 className="font-black text-[#0d2f5e] text-xl mb-3">{p.title}</h3>
-                  <p className="text-[#4a6885] text-sm leading-relaxed">{p.desc}</p>
+                  <div className="text-[#8ab4cf] text-sm mb-5">{p.label}</div>
+                  <h3 className="font-black text-white text-xl mb-3">{p.title}</h3>
+                  <p className="text-[#8ab4cf] text-sm leading-relaxed">{p.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -586,17 +586,17 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section id="contact" className="py-36 px-6 bg-[#032D60]">
+      <section id="contact" className="py-36 px-6 bg-[#030e1a]">
         <div className="max-w-4xl mx-auto">
           <Reveal>
             <div className="relative border border-[#00A1E0]/30 rounded-[2.5rem] p-1 overflow-hidden">
               <div className="absolute inset-0" style={{ background:"radial-gradient(ellipse at center, rgba(0,161,224,0.12), transparent)" }} />
-              <div className="relative bg-[#032D60] rounded-[2rem] px-10 md:px-20 py-20 text-center">
+              <div className="relative bg-[#030e1a] rounded-[2rem] px-10 md:px-20 py-20 text-center">
                 <p className="text-[#06AED5] text-xs font-bold uppercase tracking-[0.3em] mb-6">{t.cta_tag}</p>
                 <h2 className="text-[clamp(2rem,5vw,4rem)] font-black leading-tight mb-6 text-white">
                   {t.cta_h2a}<br /><span className="text-[#00A1E0]">{t.cta_h2b}</span>
                 </h2>
-                <p className="text-[#6a8caa] text-lg mb-12 max-w-lg mx-auto">{t.cta_sub}</p>
+                <p className="text-[#8ab4cf] text-lg mb-12 max-w-lg mx-auto">{t.cta_sub}</p>
                 <a href="mailto:info@inshop.io" className="inline-flex items-center gap-3 bg-[#00A1E0] hover:bg-[#06AED5] text-white font-black px-10 py-5 rounded-full text-lg transition-all hover:scale-105 shadow-[0_0_60px_rgba(0,161,224,0.4)]">
                   {t.cta_btn}
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 7l-10 10M7 7h10v10"/></svg>
@@ -608,13 +608,13 @@ export default function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-[#cce0f5] py-10 px-6 bg-[#f5f8ff]">
+      <footer className="border-t border-[#1c3350] py-10 px-6 bg-[#070c14]">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <span className="text-xl font-black text-[#0d2f5e]">in<span className="text-[#00A1E0]">S</span>hop</span>
-          <p className="text-[#6a8caa] text-xs uppercase tracking-widest">{t.footer}</p>
+          <span className="text-xl font-black text-white">in<span className="text-[#00A1E0]">S</span>hop</span>
+          <p className="text-[#8ab4cf] text-xs uppercase tracking-widest">{t.footer}</p>
           <div className="flex gap-8">
             {t.mod_links.map(([label, href]) => (
-              <Link key={href} href={href} className="text-xs text-[#6a8caa] hover:text-[#00A1E0] transition-colors">{label}</Link>
+              <Link key={href} href={href} className="text-xs text-[#8ab4cf] hover:text-[#00A1E0] transition-colors">{label}</Link>
             ))}
           </div>
         </div>

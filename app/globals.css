@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f5f8ff;
-  --foreground: #0d2f5e;
+  --background: #070c14;
+  --foreground: #ffffff;
   --accent: #00A1E0;
 }
 
@@ -17,6 +17,12 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Ensure strong contrast for all text */
+p, span, li, a, div {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Apply Heebo for Hebrew / RTL content */
