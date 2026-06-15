@@ -3,7 +3,7 @@ services:
     name: inshop-site
     env: node
     buildCommand: npm install && npm run build
-    startCommand: npm start
+    startCommand: node_modules/.bin/next start -p $PORT
     envVars:
       - key: NODE_ENV
         value: production
