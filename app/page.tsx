@@ -246,10 +246,12 @@ function MachineShowcase({ t }: { t: typeof T.en }) {
         </Reveal>
         <div className="grid lg:grid-cols-[3fr_2fr] gap-12 items-start">
           {/* Machine image */}
-          <div className="relative rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
+          <div className="relative rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.6)] bg-[#070c14]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/machine.jpg" alt="INSHOP Unit" className="w-full h-auto block" />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40 pointer-events-none" />
+            {/* vignette covers the photo's white studio background at the edges */}
+            <div className="absolute inset-0 pointer-events-none" style={{boxShadow:"inset 0 0 60px 30px #070c14"}} />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#070c14]/30 via-transparent to-[#070c14]/60 pointer-events-none" />
             <div className="absolute left-0 right-0 h-px pointer-events-none transition-all duration-700 ease-out"
               style={{ top:`${[53,29,63,63,47,86][active]}%`, background:`linear-gradient(90deg,transparent,${col}80 30%,${col} 50%,${col}80 70%,transparent)`, boxShadow:`0 0 12px ${col}60` }} />
             {t.caps.map((c, i) => (
