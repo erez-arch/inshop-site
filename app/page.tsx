@@ -60,7 +60,7 @@ function VideoPlayer() {
 
   return (
     <div className="relative group bg-black rounded-3xl overflow-hidden border border-white/8">
-      <video ref={videoRef} src="/demo.mp4" className="w-full aspect-video object-cover" playsInline muted={muted} />
+      <video ref={videoRef} src="/demo.mp4" className="w-full h-auto block" playsInline muted={muted} />
       <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         <div className="px-6 pb-5 space-y-3">
           <div className="cursor-pointer" onClick={seek}>
@@ -197,7 +197,7 @@ export default function Home() {
             </h2>
           </Reveal>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
+          <div className="grid lg:grid-cols-[3fr_2fr] gap-16 items-start">
             <div>
               {[
                 { n: "01", title: "Approach the unit", body: "Walk up to any INSHOP terminal. No interaction needed yet." },
