@@ -614,10 +614,13 @@ export default function Home() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <span className="text-xl font-black text-white">in<span className="text-[#00A1E0]">S</span>hop</span>
           <p className="text-[#8ab4cf] text-xs uppercase tracking-widest">{t.footer}</p>
-          <div className="flex gap-8">
+          <div className="flex items-center gap-6">
             {t.mod_links.map(([label, href]) => (
               <Link key={href} href={href} className="text-xs text-[#8ab4cf] hover:text-[#00A1E0] transition-colors">{label}</Link>
             ))}
+            <Link href="/v2" className="text-xs font-mono border border-white/10 hover:border-[#00A1E0]/40 hover:text-[#00A1E0] text-white/25 px-3 py-1.5 transition-all tracking-widest uppercase">
+              V2 →
+            </Link>
           </div>
         </div>
       </footer>
