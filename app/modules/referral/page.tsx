@@ -22,7 +22,7 @@ function PhoneFrame({ children }: { children: React.ReactNode }) {
 }
 
 function QRCode() {
-  const cells: boolean[][] = [
+  const cells: number[][] = [
     [1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1],
     [1,0,0,0,0,0,1,0,0,1,0,1,0,0,1,0,0,0,0,0,1],
     [1,0,1,1,1,0,1,0,1,0,1,0,1,0,1,0,1,1,1,0,1],
