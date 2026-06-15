@@ -345,6 +345,12 @@ export default function Home() {
             ))}
           </div>
           <div className="hidden md:flex items-center gap-3">
+            {/* Version switcher */}
+            <div className="flex items-center gap-1 border border-[#1c3350] rounded-full p-0.5 bg-[#0a1520]">
+              <span className="text-[10px] font-mono px-3 py-1.5 rounded-full bg-[#00A1E0]/15 text-[#00A1E0] font-bold">V1</span>
+              <Link href="/v2" className="text-[10px] font-mono px-3 py-1.5 rounded-full text-white/30 hover:text-white/70 transition-colors">V2</Link>
+              <Link href="/v3" className="text-[10px] font-mono px-3 py-1.5 rounded-full text-white/30 hover:text-white/70 transition-colors">V3</Link>
+            </div>
             {/* Language toggle */}
             <button
               onClick={() => setLang(lang === "en" ? "he" : "en")}
