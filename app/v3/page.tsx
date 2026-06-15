@@ -90,10 +90,12 @@ export default function V3() {
             <a href="#live" className="hover:text-white/80 transition-colors">Live</a>
           </div>
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1 rounded-full p-0.5" style={{ background:"rgba(255,255,255,0.05)", border:"1px solid rgba(255,255,255,0.08)" }}>
-              <Link href="/"   className="text-[10px] font-mono px-3 py-1.5 rounded-full text-white/30 hover:text-white/60 transition-colors">V1</Link>
-              <Link href="/v2" className="text-[10px] font-mono px-3 py-1.5 rounded-full text-white/30 hover:text-white/60 transition-colors">V2</Link>
-              <span className="text-[10px] font-mono px-3 py-1.5 rounded-full font-bold text-white" style={{ background:"linear-gradient(135deg,#5C67F2,#00A1E0)" }}>V3</span>
+            <div className="flex items-center gap-0.5 rounded-full p-0.5" style={{ background:"rgba(255,255,255,0.05)", border:"1px solid rgba(255,255,255,0.08)" }}>
+              <Link href="/"   className="text-[10px] font-mono px-2.5 py-1.5 rounded-full text-white/30 hover:text-white/60 transition-colors">V1</Link>
+              <Link href="/v2" className="text-[10px] font-mono px-2.5 py-1.5 rounded-full text-white/30 hover:text-white/60 transition-colors">V2</Link>
+              <span className="text-[10px] font-mono px-2.5 py-1.5 rounded-full font-bold text-white" style={{ background:"linear-gradient(135deg,#5C67F2,#00A1E0)" }}>V3</span>
+              <Link href="/v5" className="text-[10px] font-mono px-2.5 py-1.5 rounded-full text-white/30 hover:text-white/60 transition-colors">V5</Link>
+              <Link href="/v6" className="text-[10px] font-mono px-2.5 py-1.5 rounded-full text-white/30 hover:text-white/60 transition-colors">V6</Link>
             </div>
             <a href="#contact" className="text-sm font-semibold px-5 py-2 rounded-full transition-all"
               style={{ background:"linear-gradient(135deg,#5C67F2,#00A1E0)", boxShadow:"0 0 24px rgba(92,103,242,0.4)" }}>

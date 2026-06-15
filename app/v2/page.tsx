@@ -82,10 +82,14 @@ export default function V2() {
             <a href="#hardware" className="hover:text-white/70 transition-colors">Hardware</a>
             <a href="#live" className="hover:text-white/70 transition-colors">Live</a>
           </div>
-          <div className="flex items-center gap-4">
-            <Link href="/" className="font-mono text-[10px] tracking-[0.2em] uppercase text-white/20 hover:text-white/50 transition-colors hidden md:block">
-              ← Classic
-            </Link>
+          <div className="flex items-center gap-3">
+            <div className="hidden md:flex items-center gap-0.5 rounded-full p-0.5" style={{ background:"rgba(255,255,255,0.04)", border:"1px solid rgba(255,255,255,0.07)" }}>
+              {([["V1","/"],["V2","/v2"],["V3","/v3"],["V5","/v5"],["V6","/v6"]] as [string,string][]).map(([lbl,href]) => (
+                lbl === "V2"
+                  ? <span key={lbl} className="text-[10px] font-mono px-2.5 py-1.5 rounded-full font-bold text-[#00A1E0]" style={{ background:"rgba(0,161,224,0.12)" }}>{lbl}</span>
+                  : <Link key={lbl} href={href} className="text-[10px] font-mono px-2.5 py-1.5 rounded-full text-white/25 hover:text-white/70 transition-colors">{lbl}</Link>
+              ))}
+            </div>
             <a href="#contact" className="font-mono text-[10px] tracking-[0.2em] uppercase border border-white/15 hover:border-[#00A1E0]/50 hover:text-[#00A1E0] text-white/40 px-5 py-2.5 transition-all">
               Partner
             </a>
